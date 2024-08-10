@@ -16,6 +16,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "controllers/authController.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "controllers/userController.js"],
   "exclude": ["node_modules"]
 }
