@@ -14,8 +14,20 @@
     "incremental": true,
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "controllers/userController.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "controllers/userController.js",
+    ".next/types/**/*.ts",
+    "pages/index.jsx"
+  ],
   "exclude": ["node_modules"]
 }
