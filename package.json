@@ -14,15 +14,20 @@
     "seed": "knex seed:run"
   },
   "dependencies": {
+    "@nextui-org/navbar": "^2.0.36",
+    "@nextui-org/react": "^2.4.6",
+    "axios": "^1.7.3",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "framer-motion": "^11.3.24",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
     "mysql2": "^3.11.0",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@types/node": "^20",
