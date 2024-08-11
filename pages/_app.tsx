@@ -1,5 +1,7 @@
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { MainLayout } from "@/layouts/MainLayout";
+import {NextUIProvider} from '@nextui-org/react'
+
 
 import "@/styles/globals.css";
 import type { NextComponentType } from "next";
@@ -30,6 +32,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
     Component.getLayout ||
     function (page: ReactNode) {
       return (
+        <NextUIProvider>
         <>
           {UnProtectedRoutes.includes(router.pathname) ? (
             <AuthLayout>{page}</AuthLayout>
@@ -48,6 +51,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
             bodyClassName="font-[yekanbakh] text-[1.4rem]"
           />
         </>
+        </NextUIProvider>
       );
     };
   return getLayout(<Component {...pageProps} />);
