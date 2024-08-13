@@ -9,7 +9,7 @@ export const MainLayout = ({ children }: Props) => {
   return (
     <div className="h-full min-h-[100dvh] flex flex-col">
       <Header></Header>
-      <main className="h-full overflow-y-scroll overflow-x-hidden">
+      <main className="h-full overflow-x-hidden">
         {children}
       </main>
     </div>
