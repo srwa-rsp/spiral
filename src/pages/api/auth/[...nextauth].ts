@@ -62,6 +62,10 @@ export default NextAuth({
   },
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, 
+  },
+  jwt: {
+    secret: process.env.SECRET_KEY, 
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -78,5 +82,5 @@ export default NextAuth({
       }
       return session;
     }
-  }
+  },
 });
