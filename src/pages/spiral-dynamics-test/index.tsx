@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Question from "@/components/Question/Question";
 import { Button } from "@nextui-org/react";
-import { useGetQuestions } from "@/utils/services";
+import { useGetQuestions, usePostUserResults } from "@/utils/services";
 import { Progress } from "@nextui-org/progress";
 
 const index = () => {
@@ -57,15 +57,14 @@ const index = () => {
       handleSubmit(updatedAnswers);
     }
   };
-  const handleSubmit = (finalAnswers) => {
-    // const weights = answers.map((selectedOptions) =>
-    //   selectedOptions.map((option: string, index: number) => {
-    //     const weight = 3 - index;
-    //     return { option, weight };
-    //   })
-    // );
+  const handleSubmit = async (finalAnswers) => {
+try {
+  const result = await usePostUserResults(finalAnswers);
+  console.log(result)
+} catch (error) {
+  console.log(error)
+}
 
-    console.log("User Selections with Weights:", finalAnswers);
   };
 
  
@@ -75,7 +74,7 @@ const index = () => {
   }
   return (
     <div className="flex flex-col items-center justify-center px-6 py-12">
-      <Progress  label="progress" value={progress} className="py-10" />
+      <Progress  label="progress" value={progress} className="py-10 max-w-96" />
       <Question
         question={currentQuestion?.question}
         options={currentQuestion?.options}

@@ -3,28 +3,24 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 
 const Question = ({ question, options, onSelectionChange }) => {
+    
   const [selectedOptions, setSelectedOptions] = useState([]);
   const optionsArray = Object.values(options);
+
   useEffect(() => {
     setSelectedOptions([]);
   }, [question]);
-  
+
   const handleOptionClick = (option) => {
-    console.log("selectedOptions",selectedOptions)
-    console.log(option)
     if (selectedOptions.includes(option)) {
       const newSelection = selectedOptions.filter((opt) => opt !== option);
       setSelectedOptions(newSelection);
       onSelectionChange(newSelection);
-      console.log("includes:",selectedOptions)
     } else if (selectedOptions.length < 3) {
-        console.log("NOTincludes:",selectedOptions)
       const newSelection = [...selectedOptions, option];
       setSelectedOptions(newSelection);
       onSelectionChange(newSelection);
-      console.log("newSelection",newSelection)
     }
-
   };
 
   return (
