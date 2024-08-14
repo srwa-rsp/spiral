@@ -15,9 +15,8 @@ import { useRouter } from "next/router";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
-  console.log(router);
 
   const menuItems = ["Profile", "Take the Test"];
 
@@ -32,10 +31,10 @@ export default function App() {
           <p className="font-bold text-black">Spiral</p>
         </NavbarBrand>
       </NavbarContent>
-      {session && (
+      {status === "authenticated" && (
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem className="border-r-2 pr-4 ">
-            <Link color="foreground" href="#">
+            <Link color="foreground" href="/spiral-dynamics-test">
               Take the Test
             </Link>
           </NavbarItem>
@@ -48,12 +47,12 @@ export default function App() {
       )}
 
       <NavbarContent justify="end">
-        {!session && router.pathname != "/auth/login" && (
+        {status === "unauthenticated" && router.pathname != "/auth/login" && (
           <NavbarItem className="">
             <Link href="/auth/login">Login</Link>
           </NavbarItem>
         )}
-        {session && (
+        {status === "authenticated" && (
           <NavbarItem>
             <Button color="primary" variant="flat" onClick={() => signOut()}>
               LogOut
