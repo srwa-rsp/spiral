@@ -5,9 +5,9 @@ export const modelPrompt = `        You are a system trained in Spiral Dynamics.
         Format your response as a JSON object with the following fields:
         - stages: A breakdown of the user's alignment with different Spiral Dynamics stages (as percentages).
         - feedback: A detailed feedback based on the user's responses.
-        - roadmapForVerticalGrowth: Suggestions for the user's growth in Spiral Dynamics stages.
-        - roadmapForHorizontalGrowth: Suggestions for enhancing skills or perspectives within their current stage.`;
-        
+        - roadmapForVerticalGrowth: Suggestions for the user's growth in Spiral Dynamics stages. it must be an array with 3 string items.
+        - roadmapForHorizontalGrowth: Suggestions for enhancing skills or perspectives within their current stage.it must be an array with 3 string items`;
+
 export const responseStructure = {
   id: 1,
   userId: 1,
@@ -18,6 +18,58 @@ export const responseStructure = {
     green: "20%",
   },
   feedback: "",
-  roadmap_vertical: "",
-  roadmap_horizontal: "",
+  roadmap_vertical:[ "", "",""],
+  roadmap_horizontal: [ "", "",""],
+};
+
+export const referenceColors = [
+  {
+    name: "Archaic",
+    color: "beige",
+  },
+  {
+    name: "Magic",
+    color: "purple",
+  },
+  {
+    name: "Imperial",
+    color: "red",
+  },
+  {
+    name: "Diplomatic",
+    color: "amber",
+  },
+  {
+    id: 5,
+    name: "Achiever",
+    color: "orange",
+  },
+  {
+    name: "Individualist",
+    color: "green",
+  },
+  {
+    name: "Strategist",
+    color: "teal",
+  },
+  {
+    name: "Alchemist",
+    color: "turquoise",
+  },
+  {
+    name: "Unitive",
+    color: "indigo",
+  },
+];
+
+export const colors = {
+  beige: "#f5f5dc",
+  purple: "#e6e6fa",
+  red: "#ffcccc",
+  amber: "#60a5fa",
+  orange: "#ffdab9",
+  green: "#ccffcc",
+  teal: "#e0f7fa",
+  turquoise: "#afeeee",
+  indigo: "#4b008259",
 };
