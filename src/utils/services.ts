@@ -24,3 +24,12 @@ export const usePostUserResults = async(params) => {
         console.log("Error getting Stages")
     }
 }
+
+export const useGetResult= async() => {
+    try {
+        const response = await axiosInstance.get("/user/result");
+        return response.data;
+    } catch (error) {
+        console.log("Error getting Stages")
+    }
+}
