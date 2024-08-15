@@ -3,6 +3,8 @@ import Question from "@/components/Question/Question";
 import { Button } from "@nextui-org/react";
 import { useGetQuestions, usePostUserResults } from "@/utils/services";
 import { Progress } from "@nextui-org/progress";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const index = () => {
   const [questions, setQuestions] = useState([]);
@@ -10,6 +12,7 @@ const index = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const router = useRouter()
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -59,8 +62,12 @@ const index = () => {
   };
   const handleSubmit = async (finalAnswers) => {
 try {
-  const result = await usePostUserResults(finalAnswers);
-  console.log(result)
+   const response = await usePostUserResults(finalAnswers);
+   toast.success(response.message);
+   setTimeout(() => {
+     router.push('/user/profile')
+   }, 2000);
+   
 } catch (error) {
   console.log(error)
 }
