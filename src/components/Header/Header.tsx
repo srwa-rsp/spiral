@@ -18,7 +18,7 @@ export default function App() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const menuItems = ["Profile", "Take the Test"];
+  const menuItems = [{title:"Profile", link:"/user/profile"},{title: "Take the Test", link: "/spiral-dynamics-test"}];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-white">
@@ -39,7 +39,7 @@ export default function App() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#">
+            <Link color="foreground" href="/user/profile">
               Profile
             </Link>
           </NavbarItem>
@@ -63,8 +63,8 @@ export default function App() {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" href="#" size="lg">
-              {item}
+            <Link className="w-full" href={item.link} size="lg">
+              {item.title}
             </Link>
           </NavbarMenuItem>
         ))}

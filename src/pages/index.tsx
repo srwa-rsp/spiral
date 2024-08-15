@@ -3,22 +3,12 @@ import { useGetStages } from "@/utils/services";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { colors } from "@/utils/consts";
 
 const index = () => {
   const { data: session, status } = useSession();
   const [stages, setStages] = useState([]);
   const router = useRouter();
-  const colors={
-    beige: "#f5f5dc",
-    purple: "#e6e6fa",
-    red: "#ffcccc",
-    amber: "#ffecb3",
-    orange: "#ffdab9",
-    green: "#ccffcc",
-    teal: "#e0f7fa",
-    turquoise: "#afeeee",
-    indigo:"#4b008259"
-  }
 
   console.log(status)
   useEffect(() => {
@@ -38,7 +28,9 @@ const index = () => {
     };
     getStages();
   }, []);
-
+  if (stages.length == 0) {
+    return <h1>loading...</h1>;
+  }
   if (status === "authenticated") {
     return (
       <>
@@ -46,7 +38,7 @@ const index = () => {
           <h2 className="text-[3rem] text-white drop-shadow-md mix-blend-difference">Unlock the Secrets Behind Your Perception of the World</h2>
         </section>
         <section id="stages" className="flex flex-col gap-3 p-6">
-          {stages.map(stage => (
+          {stages?.map(stage => (
             <div key={stage.id} className={` flex flex-col gap-1 p-6 rounded`} style={{backgroundColor: `${colors[stage.color]}`}}>
               <h4 className="font-semibold">{stage.name}</h4>
               <p><span>Description: </span>{stage.description}</p>
