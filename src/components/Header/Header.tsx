@@ -12,13 +12,18 @@ import {
 } from "@nextui-org/react";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from '@/assets/images/enso-spiral.png'
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const menuItems = [{title:"Profile", link:"/user/profile"},{title: "Take the Test", link: "/spiral-dynamics-test"}];
+  const menuItems = [
+    { title: "Profile", link: "/user/profile" },
+    { title: "Take the Test", link: "/spiral-dynamics-test" },
+  ];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-white">
@@ -28,7 +33,10 @@ export default function App() {
           className="sm:hidden text-black"
         />
         <NavbarBrand>
-          <p className="font-bold text-black">Spiral</p>
+          <Image width={30} height={30} src={logo} alt={"logo"} />
+          <Link color="foreground" href="/" className="text-[1.6rem] font-bold">
+            Spiral
+          </Link>
         </NavbarBrand>
       </NavbarContent>
       {status === "authenticated" && (

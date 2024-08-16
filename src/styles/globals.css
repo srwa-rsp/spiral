@@ -17,6 +17,7 @@ html {
 
 body {
   margin: 0;
+  font-family: 'Nunito';
 }
 
 ul {
@@ -30,9 +31,36 @@ li {
 a {
   text-decoration: none;
 }
-
+h3{
+  font-size: 2rem;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  @layer base {
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(/src/assets/fonts/Nunito-Regular.ttf) format('truetype'),
+      url("../assets/fonts/Nunito-Regular.ttf") format("truetype")
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style:normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(/src/assets/fonts/Nunito-SemiBold.ttf) format('truetype'),
+      url("../assets/fonts/Nunito-SemiBold.ttf") format("truetype")
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style:normal;
+      font-weight: 700;
+      src: url(/src/assets/fonts/Nunito-Bold.ttf) format('truetype'),
+      url("../assets/fonts/Nunito-Bold.ttf") format("truetype")
+    }
   }
 }

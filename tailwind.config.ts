@@ -11,7 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-
+      fontFamily: {
+        nunito: ['Nunito', 'sans-serif'], 
+      },
     },
   },
   plugins: [nextui()]
