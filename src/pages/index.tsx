@@ -40,7 +40,6 @@ const index = () => {
           id="hero"
           className="relative flex flex-col justify-center items-center px-10 "
         >
-          <div className="absolute bg-[url('../assets/images/spiral.webp')] bg-cover bg-center"></div>
           <div className="py-20">
             <h2 className=" pl-20 text-[2rem] font-bold drop-shadow-md self-start">
               Your Personal Growth Coach
