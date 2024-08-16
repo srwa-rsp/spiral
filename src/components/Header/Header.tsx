@@ -12,6 +12,8 @@ import {
 } from "@nextui-org/react";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from '@/assets/images/enso-spiral.png'
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -31,6 +33,7 @@ export default function App() {
           className="sm:hidden text-black"
         />
         <NavbarBrand>
+          <Image width={30} height={30} src={logo} alt={"logo"} />
           <Link color="foreground" href="/" className="text-[1.6rem] font-bold">
             Spiral
           </Link>
