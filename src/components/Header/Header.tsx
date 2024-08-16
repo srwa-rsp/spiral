@@ -41,13 +41,13 @@ export default function App() {
       </NavbarContent>
       {status === "authenticated" && (
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem className="border-r-2 pr-4 ">
-            <Link color="foreground" href="/spiral-dynamics-test">
+          <NavbarItem className={`border-r-2 pr-4`} >
+            <Link color="foreground" href="/spiral-dynamics-test" className={`${router.pathname ==="/spiral-dynamics-test" ? 'font-semibold border-b-2': '' } p-1`}>
               Take the Test
             </Link>
           </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="/user/profile">
+          <NavbarItem >
+            <Link color="foreground" href="/user/profile" className={`${router.pathname ==="/user/profile" ? 'font-semibold border-b-2': '' } p-1`}>
               Profile
             </Link>
           </NavbarItem>
