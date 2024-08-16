@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Spinner from "../spinner/Spinner";
 
 const classes: any = {
-  base: "focus:outline-none transition ease-in-out duration-300 py-2 px-1 text-[1rem] font-bold flex justify-center items-center relative focus:ring-2 focus:ring-opacity-50  cursor-pointer",
+  base: "focus:outline-none transition ease-in-out duration-300 py-2 px-1 text-[1rem] font-bold flex justify-center items-center relative  cursor-pointer",
   disabled: "!opacity-50 !cursor-not-allowed",
   colors: {
     primary: "bg-secondary hover:bg-blue-dark focus:ring-blue-light text-white",

@@ -14,6 +14,9 @@ const config: Config = {
       fontFamily: {
         nunito: ['Nunito', 'sans-serif'], 
       },
+      colors:{
+        primary: '#9382e0',
+      }
     },
   },
   plugins: [nextui()]

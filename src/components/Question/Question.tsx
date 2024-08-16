@@ -31,8 +31,8 @@ const Question = ({ question, options, onSelectionChange }) => {
           <Button
             key={index}
             className={`${
-              selectedOptions.includes(option) ? "bg-green-400" : "default"
-            } outline-none`}
+              selectedOptions.includes(option) ? " bg-[#F7EFE5]" : "default"
+            } outline-none rounded`}
             onClick={() => handleOptionClick(option)}
           >
             {option}
