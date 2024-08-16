@@ -5,12 +5,14 @@ import { useGetQuestions, usePostUserResults } from "@/utils/services";
 import { Progress } from "@nextui-org/progress";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { QuestionData, FinalAnswers, Answer } from "@/types/interfaces/QuestionsInterface";
 
 const index = () => {
   const [questions, setQuestions] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [answers, setAnswers] = useState(Array(questions?.length).fill([]));
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const currentQuestion = questions[currentQuestionIndex];
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const currentQuestion:QuestionData = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
   const router = useRouter()
 
@@ -34,15 +36,13 @@ const index = () => {
   };
 
   const handleNextQuestion = () => {
-    console.log("answers",answers)
-    console.log("currentQuestionIndex",currentQuestionIndex)
     const currentSelections = answers[currentQuestionIndex] || [];
     if (currentSelections.length !== 3) {
       alert("Please select 3 options before proceeding.");
       return;
     }
 
-    const weights = currentSelections.map((option, index) => {
+    const weights = currentSelections.map((option:string, index:number): Answer => {
       return { option, weight: 3 - index };
     });
 
@@ -60,10 +60,12 @@ const index = () => {
       handleSubmit(updatedAnswers);
     }
   };
-  const handleSubmit = async (finalAnswers) => {
+  const handleSubmit = async (finalAnswers:FinalAnswers[]) => {
+    setIsLoading(true)
 try {
    const response = await usePostUserResults(finalAnswers);
    toast.success(response.message);
+   setIsLoading(false)
    setTimeout(() => {
      router.push('/user/profile')
    }, 2000);
@@ -81,20 +83,20 @@ try {
   }
   return (
     <div className="flex flex-col items-center justify-center px-6 py-12">
-      <Progress  label="progress" value={progress} className="py-10 max-w-96" />
+      <Progress  label={`${currentQuestionIndex +1} /  5`} value={progress} className="py-10 max-w-96" color="primary" />
       <Question
         question={currentQuestion?.question}
         options={currentQuestion?.options}
-        onSelectionChange={(selection: string) =>
+        onSelectionChange={(selection: string[]) =>
           handleSelectionChange(currentQuestionIndex, selection)
         }
       />
 
       {currentQuestionIndex == 4 && (
-        <Button onClick={handleNextQuestion}>Submit</Button>
+        <Button color="primary" onClick={handleNextQuestion} isLoading={isLoading}>Submit</Button>
       )}
       {currentQuestionIndex != 4 && (
-        <Button onClick={handleNextQuestion}>Next</Button>
+        <Button color="primary" onClick={handleNextQuestion}>Next</Button>
       )}
     </div>
   );
