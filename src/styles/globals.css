@@ -31,7 +31,9 @@ li {
 a {
   text-decoration: none;
 }
-
+h3{
+  font-size: 2rem;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
