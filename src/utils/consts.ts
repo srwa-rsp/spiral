@@ -1,3 +1,5 @@
+import { ResultData } from "@/types/interfaces/UserInterface";
+
 export const modelPrompt = `        You are a system trained in Spiral Dynamics. 
         The user has answered a test with 5 questions. 
         Each question has 3 answers with different weights.
@@ -8,9 +10,9 @@ export const modelPrompt = `        You are a system trained in Spiral Dynamics.
         - roadmapForVerticalGrowth: Suggestions for the user's growth in Spiral Dynamics stages. it must be an array with 3 string items.
         - roadmapForHorizontalGrowth: Suggestions for enhancing skills or perspectives within their current stage.it must be an array with 3 string items`;
 
-export const responseStructure = {
+export const responseStructure:ResultData = {
   id: 1,
-  userId: 1,
+  user_id: 1,
   stages: {
     orange: "30%",
     blue: "20%",
