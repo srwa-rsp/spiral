@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: `${modelPrompt} The JSON response should be structured as follows: ${(responseStructure)}.Here is a reference object for the stage and color names:${JSON.stringify(referenceColors)}.Please use the stage names and colors exactly as defined in the reference object.`,
+            content: `${modelPrompt} The JSON response should be structured as follows: ${(responseStructure)}.Here is a reference object for the stage and color names:${JSON.stringify(referenceColors)}.Please use the color names  exactly as defined in the reference object for representing stages result.`,
           },
           {
             role: "user",
