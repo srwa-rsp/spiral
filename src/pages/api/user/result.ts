@@ -1,17 +1,19 @@
 import db from "../../../../lib/db";
+import { getToken } from "next-auth/jwt";
 
 export default async function handler(req, res) {
+  const token = await getToken({ req });
   if (req.method === "GET") {
-    try {
-      const result = await db("user_result")
-        .select("*")
-        .orderBy("id", "desc")
-        .first();
-
-      res.status(200).json(result);
-    } catch (error) {
-      console.error("Error fetching result:", error);
-      res.status(500).json({ error: "Failed to fetch result" });
+    if (token) {
+      try {
+        const result = await db("user_result").select("*").orderBy("id", "desc").first();
+        res.status(200).json(result);
+      } catch (error) {
+        console.error("Error fetching result:", error);
+        res.status(500).json({ error: "Failed to fetch result" });
+      }
+    } else {
+      res.status(401).json({ message: "Unauthorized access - please log in." });
     }
   } else {
     res.setHeader("Allow", ["GET"]);
