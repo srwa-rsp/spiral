@@ -3,10 +3,11 @@ import { getToken } from "next-auth/jwt";
 
 export default async function handler(req, res) {
   const token = await getToken({ req });
+  const userId = Number(token?.id);
   if (req.method === "GET") {
     if (token) {
       try {
-        const result = await db("user_result").select("*").orderBy("id", "desc").first();
+        const result = await db("user_result").where("user_id", userId).select("*").orderBy("id", "desc").first();
         res.status(200).json(result);
       } catch (error) {
         console.error("Error fetching result:", error);
