@@ -36,7 +36,7 @@ export default async function handler(req, res) {
               role: "system",
               content: `${modelPrompt} The JSON response should be structured as follows: ${responseStructure}.Here is a reference object for the stage and color names:${JSON.stringify(
                 referenceColors
-              )}.Please use the stage names and colors exactly as defined in the reference object.`,
+              )}.Please use the stage names and colors exactly as defined in the reference object. Always use the colors names for percentages`,
             },
             {
               role: "user",
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         const openAIResponse = JSON.parse(openAIResponseText);
 
         await db("user_result").insert({
-          user_id: 1,
+          user_id:token.id,
           stages: JSON.stringify(openAIResponse.stages),
           feedback: openAIResponse.feedback,
           roadmap_vertical: JSON.stringify(
