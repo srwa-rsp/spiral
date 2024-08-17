@@ -14,7 +14,7 @@ const UnProtectedRoutes: string[] = [`/auth/login`, "/auth/register"];
 const PublicRoutes: string[] = ["/home"];
 const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   Component,
-  pageProps,
+  pageProps: { session, ...pageProps },
 }: AppLayoutProps) => {
   const router = useRouter();
   React.useEffect(() => {
@@ -31,7 +31,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
     Component.getLayout ||
     function (page: ReactNode) {
       return (
-        <SessionProvider>
+        <SessionProvider session={session}>
         <NextUIProvider>
         <>
           {UnProtectedRoutes.includes(router.pathname) ? (
