@@ -18,6 +18,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response && error.response.status === 401) {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/auth/login';
+      }
+    }
     return Promise.reject(error);
   }
 );

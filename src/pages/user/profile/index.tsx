@@ -6,10 +6,14 @@ import { PieChart, Pie, Cell } from "recharts";
 import { colors } from "@/utils/consts";
 import { ChartData } from "@/types/interfaces/StagesInterface";
 import { ResultData } from "@/types/interfaces/UserInterface";
+import Spinner from "@/components/spinner/Spinner";
+import { useSession } from "next-auth/react";
 
 const index = () => {
   const [result, setResult] = useState<ResultData | null>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
+  const {  status } = useSession();
+
 
   useEffect(() => {
     const getResult = async () => {
@@ -53,14 +57,18 @@ const index = () => {
     );
   };
   if (result === null) {
-    return <h1>loading...</h1>;
+    return (
+      <div className="flex justify-center items-center h-screen ">
+        <Spinner />
+      </div>
+    );
   }
+  if(status === "authenticated"){
   return (
     <div className="flex flex-col gap-6 px-6 py-12 md:px-16 ">
       <div className="flex flex-col md:flex-row justify-between items-center p-20">
         <div className=" max-w-[35rem] ">
           <h2 className="font-bold text-[2.5rem]">Your Profile</h2>
-          {/* <Image width={100} height={120} src={avatar} alt={"avatar"} /> */}
           <p className="">{result?.feedback}</p>
         </div>
         <div className=" flex flex-col gap-2 items-center justify-center ">
@@ -80,7 +88,9 @@ const index = () => {
               ))}
             </Pie>
           </PieChart>
-            <p className="text-[0.8rem]">Distribution Across Spiral Dynamics Stages </p>
+          <p className="text-[0.8rem]">
+            Distribution Across Spiral Dynamics Stages{" "}
+          </p>
         </div>
       </div>
       <div className="flex flex-col gap-6 md:flex-row">
@@ -106,7 +116,7 @@ const index = () => {
         </div>
       </div>
     </div>
-  );
+  );}
 };
 
 export default index;
