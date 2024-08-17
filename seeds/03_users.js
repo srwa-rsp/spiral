@@ -14,6 +14,12 @@ export async function seed(knex) {
               email:"serwa@gmail.com",
               password: hashedPassword,
             },
+            {
+              id: 2,
+              name: "alina",
+              email:"alina@gmail.com",
+              password: hashedPassword,
+            },
 
           
 
