@@ -3,11 +3,11 @@ import { Form, Formik } from "formik";
 import FormikController from "@/components/formik/FormikController";
 import Button from "@/components/Button/Button";
 import * as Yup from "yup";
-import { ApiResponse, User } from "@/types/apiTypes";
-import { useLoginUser } from "@/utils/services";
 import { toast } from "react-toastify";
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from "next/router";
+import Image from "next/image";
+import ensoImg from '../../assets/images/enso-login.png'
 
 
 
@@ -42,8 +42,8 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-between px-6">
-      <div className="">
+    <div className="flex justify-center gap-40 px-6">
+      <div className="p-10 border-2 border-gray-200 rounded-lg">
         <Formik
           enableReinitialize
           initialValues={initialValues}
@@ -78,7 +78,7 @@ const Login = () => {
           }}
         </Formik>
       </div>
-      <div>image</div>
+      <div ><Image className="w-[20rem]" src={ensoImg} alt={"enso"} /></div>
     </div>
   );
 };
