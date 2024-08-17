@@ -6,13 +6,13 @@ import React, { useEffect, useState } from "react";
 import { colors } from "@/utils/consts";
 import Link from "next/link";
 import Image from "next/image";
+import { Spinner } from "@nextui-org/react";
 
 const index = () => {
   const { data: session, status } = useSession();
   const [stages, setStages] = useState([]);
   const router = useRouter();
 
-  console.log(status);
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/auth/login");
@@ -31,7 +31,11 @@ const index = () => {
     getStages();
   }, []);
   if (stages.length == 0) {
-    return <h1>loading...</h1>;
+    return (
+      <div className="flex justify-center items-center h-screen ">
+        <Spinner />
+      </div>
+    );;
   }
   if (status === "authenticated") {
     return (
