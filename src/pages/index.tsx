@@ -38,9 +38,9 @@ const index = () => {
       <>
         <section
           id="hero"
-          className="relative flex flex-col justify-center items-center px-10 "
+          className="relative h-screen flex flex-col justify-center items-center px-10 "
         >
-          <div className="py-20">
+          <div className="pb-20">
             <h2 className=" pl-20 text-[2rem] font-bold drop-shadow-md self-start">
               Your Personal Growth Coach
             </h2>

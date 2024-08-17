@@ -82,7 +82,7 @@ try {
     return <h1>loading...</h1>;
   }
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-12">
+    <div className="flex flex-col items-center justify-center px-6 py-12 gap-10">
       <Progress  label={`${currentQuestionIndex +1} /  5`} value={progress} className="py-10 max-w-96" color="primary" />
       <Question
         question={currentQuestion?.question}
