@@ -7,7 +7,7 @@ const Spinner = ({ className }: any) => {
       <svg
         aria-hidden="true"
         className={clsx(
-          `mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`,
+          `mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-400 fill-primary`,
           className && className
         )}
         viewBox="0 0 100 101"
