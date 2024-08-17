@@ -15,7 +15,7 @@ export default NextAuth({
           user &&
           (await bcrypt.compare(credentials?.password, user.password))
         ) {
-          return { id: user.id, email: user.email };
+          return { id: user.id, email: user.email, name:user.name };
         } else {
           throw new Error("Invalid credentials");
         }
@@ -38,6 +38,7 @@ export default NextAuth({
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.name = user.name;
       }
       return token;
     },
