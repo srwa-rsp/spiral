@@ -1,33 +1,37 @@
-
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
-import db from '../../../../lib/db';
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
+import db from "../../../../lib/db";
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        const user = await db('users').where('email', credentials?.email).first();
+        const user = await db("users")
+          .where("email", credentials?.email)
+          .first();
 
-        if (user && await bcrypt.compare(credentials?.password, user.password)) {
+        if (
+          user &&
+          (await bcrypt.compare(credentials?.password, user.password))
+        ) {
           return { id: user.id, email: user.email };
         } else {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
       },
-      credentials: undefined
-    })
+      credentials: {
+        username: { label: "email", type: "email" },
+        password: { label: "password", type: "password" },
+      },
+    }),
   ],
   pages: {
-    signIn: '/auth/login', 
+    signIn: "/auth/login",
   },
   session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, 
-  },
-  jwt: {
-    secret: process.env.SECRET_KEY, 
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -38,11 +42,9 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id;
-        session.user.email = token.email;
-      }
+      session.id = token.id;
+      session.token = token; 
       return session;
-    }
+    },
   },
 });
