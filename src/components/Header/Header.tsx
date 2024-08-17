@@ -10,7 +10,7 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signOut} from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from '@/assets/images/enso-spiral.png'
@@ -62,7 +62,7 @@ export default function App() {
         )}
         {status === "authenticated" && (
           <NavbarItem>
-            <Button color="primary" variant="flat" onClick={() => signOut()}>
+            <Button color="primary" variant="flat" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/auth/login' })}>
               LogOut
             </Button>
           </NavbarItem>
