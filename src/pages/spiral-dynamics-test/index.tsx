@@ -40,7 +40,6 @@ const index = () => {
     const newAnswers = [...answers];
     newAnswers[questionIndex] = selection;
     setAnswers(newAnswers);
-    console.log("newAnswers:", newAnswers);
   };
 
   const handleNextQuestion = () => {
@@ -79,8 +78,8 @@ const index = () => {
       setTimeout(() => {
         router.push("/user/profile");
       }, 2000);
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      toast.error(error);
     }
   };
 
