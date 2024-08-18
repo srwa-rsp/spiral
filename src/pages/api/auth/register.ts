@@ -1,19 +1,38 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import db from '../../../../lib/db'
-import bcrypt from 'bcryptjs'
+import { hash } from 'bcryptjs';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    try {
-      const { email, password } = req.body
-      const hashedPassword = await bcrypt.hash(password, 10)
-      await db('users').insert({ email, password: hashedPassword })
-      res.status(201).json({ success: true })
-    } catch (error) {
-      res.status(500).json({ error: 'Something went wrong.' })
+
+type Data = {
+  message: string;
+};
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: 'Please provide all required fields' });
+  }
+
+  try {
+    const existingUser = await db('users').where({ email }).first();
+    if (existingUser) {
+      return res.status(409).json({ message: 'User already exists' });
     }
-  } else {
-    res.setHeader('Allow', ['POST'])
-    res.status(405).end(`Method ${req.method} Not Allowed`)
+    const hashedPassword = await hash(password, 10);
+    await db('users').insert({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong' });
   }
 }
+
