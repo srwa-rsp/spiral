@@ -18,12 +18,14 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    const message =
+    error.response?.data?.message || 'An unexpected error occurred';
     if (error.response && error.response.status === 401) {
       if (typeof window !== 'undefined') {
         window.location.href = '/auth/login';
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(message);
   }
 );
 
