@@ -4,45 +4,39 @@ import FormikController from "@/components/formik/FormikController";
 import Button from "@/components/Button/Button";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import ensoImg from '../../assets/images/enso-login.png'
-
 
 
 const initialValues = {
-    email: "",
-    password: "",
-  };
+  email: "",
+  password: "",
+};
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .required().email(),
-      password: Yup.string().required(),
-  });
-
-
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email(),
+  password: Yup.string().required(),
+});
 
 const Login = () => {
-
   const router = useRouter();
-  const onSubmit = async (values:any) => {
+
+  const onSubmit = async (values: any) => {
     try {
-      const {email,password} = values;
-      await signIn('credentials', {
+      const { email, password } = values;
+      await signIn("credentials", {
         redirect: false,
         email,
-       password,
-       callbackUrl: '/',
+        password,
+        callbackUrl: "/",
       });
-      router.push('/');
+      router.push("/");
     } catch (err) {
-      toast.error(`Error!`);
+      toast.error(err);
     }
   };
   return (
-    <div className="flex justify-center gap-40 px-6">
+    <div className="flex justify-start gap-40 px-6 ">
       <div className="p-10 border-2 border-gray-200 rounded-lg">
         <Formik
           enableReinitialize
@@ -71,14 +65,21 @@ const Login = () => {
                   color="primary"
                   className={"w-full rounded-lg  mt-32 "}
                 >
-                  submit{" "}
+                  Login
+                </Button>
+                <Button
+                  type="button"
+                  color="secondary"
+                  className={"w-full rounded-lg  mt-2 "}
+                  onClick={() => router.push("/auth/register")}
+                >
+                  Register
                 </Button>
               </Form>
             );
           }}
         </Formik>
       </div>
-      <div ><Image className="w-[20rem]" src={ensoImg} alt={"enso"} /></div>
     </div>
   );
 };

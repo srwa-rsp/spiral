@@ -5,7 +5,7 @@ export const useGetStages = async() => {
         const response = await axiosInstance.get("/stages");
         return response.data;
     } catch (error) {
-        console.log("Error getting Stages")
+        throw error;
     }
 }
 export const useGetQuestions = async() => {
@@ -13,7 +13,7 @@ export const useGetQuestions = async() => {
         const response = await axiosInstance.get("/questions");
         return response.data;
     } catch (error) {
-        console.log("Error getting Stages")
+        throw error;
     }
 }
 export const usePostUserResults = async(params) => {
@@ -21,7 +21,7 @@ export const usePostUserResults = async(params) => {
         const response = await axiosInstance.post("user/generate-result",params);
         return response.data;
     } catch (error) {
-        console.log("Error getting Stages")
+        throw error;
     }
 }
 
@@ -30,6 +30,15 @@ export const useGetResult= async() => {
         const response = await axiosInstance.get("/user/result");
         return response.data;
     } catch (error) {
-        console.log("Error getting Stages")
+        throw error;
+    }
+}
+
+export const useRegisterUser = async(params) => {
+    try {
+        const response = await axiosInstance.post("/auth/register",params);
+        return response.data;
+    } catch (error) {
+        throw error;
     }
 }

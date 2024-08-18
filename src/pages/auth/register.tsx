@@ -4,10 +4,10 @@ import FormikController from "@/components/formik/FormikController";
 import Button from "@/components/Button/Button";
 import * as Yup from "yup";
 import { useRegisterUser } from "@/utils/services";
-import { User, ApiResponse } from "@/types/apiTypes";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
-const initialValues: User = {
+const initialValues = {
   name: "",
   email: "",
   password: "",
@@ -19,20 +19,24 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
 });
 
-const onSubmit = async (values: User) => {
-  try {
-    const response: ApiResponse<User> = await useRegisterUser(values);
-    // toast.success("Success!")
-    console.log(response);
-  } catch (err) {
-    toast.error(`Error!`);
-  }
-};
 
 const Register = () => {
+  const router = useRouter();
+
+  const onSubmit = async (values) => {
+    try {
+      const response = await useRegisterUser(values);
+      toast.success(response.message)
+      router.push('/auth/login')
+    } catch (err) {
+      toast.error(err);
+    }
+  };
+  
+
   return (
-    <div className="flex justify-between px-6">
-      <div className="">
+    <div className="flex justify-start gap-40 px-6 ">
+      <div className="p-10 border-2 border-gray-200 rounded-lg">
         <Formik
           enableReinitialize
           initialValues={initialValues}
@@ -73,7 +77,6 @@ const Register = () => {
           }}
         </Formik>
       </div>
-      <div>image</div>
     </div>
   );
 };
