@@ -92,10 +92,11 @@ const index = () => {
   }
   return (
     <div className="flex flex-col items-center justify-center px-6 py-12 gap-10">
+      <p className="pt-10">Please read the options carefully and select the three (3) that best suit you, in the order of preference.</p>
       <Progress
         label={`${currentQuestionIndex + 1} /  5`}
         value={progress}
-        className="py-10 max-w-96"
+        className="pb-10 max-w-96"
         color="primary"
       />
       <Question
