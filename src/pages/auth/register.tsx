@@ -77,7 +77,6 @@ const Register = () => {
           }}
         </Formik>
       </div>
-      <div>image</div>
     </div>
   );
 };
