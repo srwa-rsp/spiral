@@ -31,8 +31,8 @@ const Question: React.FC<QuestionProps>  = ({ question, options, onSelectionChan
           <Button
             key={index}
             className={`${
-              selectedOptions.includes(option) ? "bg-green-400" : "default"
-            } outline-none`}
+              selectedOptions.includes(option) ? "bg-orange-200 " : "default"
+            } outline-none rounded`}
             onClick={() => handleOptionClick(option)}
           >
             {option}
