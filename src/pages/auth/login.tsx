@@ -6,9 +6,9 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { UserLogin } from "@/types/interfaces/UserInterface";
 
-
-const initialValues = {
+const initialValues:UserLogin = {
   email: "",
   password: "",
 };
@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const router = useRouter();
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: UserLogin) => {
     try {
       const { email, password } = values;
       await signIn("credentials", {
@@ -31,7 +31,7 @@ const Login = () => {
         callbackUrl: "/",
       });
       router.push("/");
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err);
     }
   };

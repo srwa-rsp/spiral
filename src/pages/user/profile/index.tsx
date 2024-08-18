@@ -1,7 +1,5 @@
 import { useGetResult } from "@/utils/services";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import avatar from "@/assets/images/avatar.png";
 import { PieChart, Pie, Cell } from "recharts";
 import { colors } from "@/utils/consts";
 import { ChartData } from "@/types/interfaces/StagesInterface";
@@ -22,7 +20,7 @@ const index = () => {
         setResult(response);
         const data = Object.entries(response.stages).map(([name, value]) => ({
           name,
-          value,
+          value: Number(value),
         }));
         setChartData(data);
       } catch (error) {

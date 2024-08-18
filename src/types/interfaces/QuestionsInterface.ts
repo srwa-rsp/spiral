@@ -13,3 +13,9 @@ export interface Answer {
     question: string;
     answers: Answer[];
   }
+
+  export interface QuestionProps {
+    question: string; 
+    options: string[]; 
+    onSelectionChange: (selectedOption: string[]) => void;
+  }

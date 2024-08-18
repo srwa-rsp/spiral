@@ -6,13 +6,15 @@ import {
   referenceColors,
 } from "../../../utils/consts";
 import { getToken } from "next-auth/jwt";
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 
 const MODEL = "gpt-4o-mini";
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export default async function handler(req, res) {
+export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   const token = await getToken({ req });
   if (req.method === "POST") {
     if (token) {
@@ -36,7 +38,7 @@ export default async function handler(req, res) {
               role: "system",
               content: `${modelPrompt} The JSON response should be structured as follows: ${responseStructure}.Here is a reference object for the stage and color names:${JSON.stringify(
                 referenceColors
-              )}.Please use the stage names and colors exactly as defined in the reference object. Always use the colors names for percentages`,
+              )}.Always use the color names for result stage percentages`,
             },
             {
               role: "user",
