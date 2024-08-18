@@ -6,8 +6,9 @@ import * as Yup from "yup";
 import { useRegisterUser } from "@/utils/services";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { UserRegister } from "@/types/interfaces/UserInterface";
 
-const initialValues = {
+const initialValues:UserRegister = {
   name: "",
   email: "",
   password: "",
@@ -23,12 +24,12 @@ const validationSchema = Yup.object().shape({
 const Register = () => {
   const router = useRouter();
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values:UserRegister) => {
     try {
       const response = await useRegisterUser(values);
       toast.success(response.message)
       router.push('/auth/login')
-    } catch (err) {
+    } catch (err:any) {
       toast.error(err);
     }
   };

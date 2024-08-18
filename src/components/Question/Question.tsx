@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-// import { Button} from '@nextui-org/react';
+import { QuestionProps } from "@/types/interfaces/QuestionsInterface"; 
 import Button from "../Button/Button";
 
-const Question = ({ question, options, onSelectionChange }) => {
+const Question: React.FC<QuestionProps>  = ({ question, options, onSelectionChange }) => {
     
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const optionsArray = Object.values(options);
 
   useEffect(() => {
     setSelectedOptions([]);
   }, [question]);
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = (option:string) => {
     if (selectedOptions.includes(option)) {
       const newSelection = selectedOptions.filter((opt) => opt !== option);
       setSelectedOptions(newSelection);
@@ -31,8 +31,8 @@ const Question = ({ question, options, onSelectionChange }) => {
           <Button
             key={index}
             className={`${
-              selectedOptions.includes(option) ? " bg-[#F7EFE5]" : "default"
-            } outline-none rounded`}
+              selectedOptions.includes(option) ? "bg-green-400" : "default"
+            } outline-none`}
             onClick={() => handleOptionClick(option)}
           >
             {option}

@@ -64,7 +64,7 @@ export const referenceColors = [
   },
 ];
 
-export const colors = {
+export const colors: Record<string, string>  = {
   beige: "#f5f5dc",
   purple: "#e6e6fa",
   red: "#ffcccc",
