@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Spinner } from "@nextui-org/react";
 import circle from '@/assets/images/Circle.svg'
 import spiral from '@/assets/images/Spiral.svg'
+import { toast } from "react-toastify";
 
 const index = () => {
   const { data: session, status } = useSession();
@@ -26,8 +27,8 @@ const index = () => {
       try {
         const response = await useGetStages();
         setStages(response);
-      } catch (error) {
-        console.log("Error getting Stages");
+      } catch (error:any) {
+        toast.error(error)
       }
     };
     getStages();

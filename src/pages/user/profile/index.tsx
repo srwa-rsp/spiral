@@ -6,6 +6,7 @@ import { ChartData } from "@/types/interfaces/StagesInterface";
 import { ResultData } from "@/types/interfaces/UserInterface";
 import Spinner from "@/components/spinner/Spinner";
 import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 const index = () => {
   const [result, setResult] = useState<ResultData | null>(null);
@@ -23,9 +24,8 @@ const index = () => {
           value: Number(value),
         }));
         setChartData(data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error:any) {
+toast.error(error)      }
     };
     getResult();
   }, []);
