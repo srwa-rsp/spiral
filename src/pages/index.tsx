@@ -10,10 +10,11 @@ import { Spinner } from "@nextui-org/react";
 import circle from '@/assets/images/Circle.svg'
 import spiral from '@/assets/images/Spiral.svg'
 import { toast } from "react-toastify";
+import { StageData } from "@/types/interfaces/StagesInterface";
 
 const index = () => {
   const { data: session, status } = useSession();
-  const [stages, setStages] = useState([]);
+  const [stages, setStages] = useState<StageData[]>([]);
   const router = useRouter();
 
   useEffect(() => {
