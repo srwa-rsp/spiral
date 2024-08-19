@@ -13,9 +13,21 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["src/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "controllers/authController.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "controllers/userController.js",
+    ".next/types/**/*.ts",
+    "pages/index.jsx"
+  ],
   "exclude": ["node_modules"]
 }
