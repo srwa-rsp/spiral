@@ -7,10 +7,14 @@ import { colors } from "@/utils/consts";
 import Link from "next/link";
 import Image from "next/image";
 import { Spinner } from "@nextui-org/react";
+import circle from '@/assets/images/Circle.svg'
+import spiral from '@/assets/images/Spiral.svg'
+import { toast } from "react-toastify";
+import { StageData } from "@/types/interfaces/StagesInterface";
 
 const index = () => {
   const { data: session, status } = useSession();
-  const [stages, setStages] = useState([]);
+  const [stages, setStages] = useState<StageData[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,8 +28,8 @@ const index = () => {
       try {
         const response = await useGetStages();
         setStages(response);
-      } catch (error) {
-        console.log("Error getting Stages");
+      } catch (error:any) {
+        toast.error(error)
       }
     };
     getStages();
@@ -44,13 +48,15 @@ const index = () => {
           id="hero"
           className="relative h-screen flex flex-col justify-center items-center px-10 "
         >
-          <div className="pb-20">
-            <h2 className=" pl-20 text-[2rem] font-bold drop-shadow-md self-start">
+          <div className="pb-20 relative overflow-hidden">
+            <h2 className=" pl-20 text-[2rem] font-bold drop-shadow-md self-start ">
               Your Personal Growth Coach
             </h2>
-            <h2 className="relative text-[3rem] font-bold drop-shadow-md text-center">
+            <h2 className="relative text-[3rem] font-bold drop-shadow-md text-center ">
               Unlock the Secrets Behind Your Perception of the World
             </h2>
+            <Image width={300} src={circle} alt={""} className=" absolute left-10 bottom-20 -z-10" />
+            <Image width={300} src={spiral} alt={""} className=" absolute right-10 top-20 -z-10" />
           </div>
           <div className="p-6">
             <div className=" flex flex-col md:flex-row gap-6 ">
@@ -84,7 +90,7 @@ const index = () => {
         </section>
         <section className="flex justify-between p-6">
           <div className="basis-1/2 p-8">
-            <h3 className="py-6">What is Spiral Dynamics?</h3>
+            <h3 className="py-6 font-bold">What is Spiral Dynamics?</h3>
             <p>
               Spiral Dynamics is a captivating map of human development that
               explores the evolving nature of our values, beliefs, and
@@ -96,7 +102,7 @@ const index = () => {
             </p>
           </div>
           <div className="basis-1/2 p-8">
-            <h3 className="py-6">Why it is important?</h3>
+            <h3 className="py-6 font-bold">Why it is important?</h3>
             <p>
               This theory isn't just about individual growth; it's a lens
               through which we can understand the movements of societies,
@@ -110,28 +116,18 @@ const index = () => {
             </p>
           </div>
 
-          {/* <div className="border-2 border-gray-200 py-8 px-12 flex items-center justify-center rounded-lg cursor-pointer w-20 h-10">
-            <Link href={"/"} className=" font-semibold ">
-              Join The Waitlist
-            </Link>
-          </div> */}
         </section>
 
-        <section id="stages" className="flex flex-col gap-3 p-6">
+        <section id="stages" className="flex flex-wrap gap-6 p-6 justify-center">
           {stages?.map((stage) => (
             <div
               key={stage.id}
-              className={` flex flex-col gap-1 p-6 rounded`}
-              style={{ backgroundColor: `${colors[stage.color]}` }}
+              className={` flex flex-col gap-1 p-6 rounded border-l-4 min-w-[20rem] max-w-[25rem] `}
+              style={{ borderColor: `${colors[stage.color]}` }}
             >
-              <h4 className="font-semibold">{stage.name}</h4>
+              <h4 className="font-bold">{stage.name}</h4>
               <p>
-                <span>Description: </span>
                 {stage.description}
-              </p>
-              <p>
-                <span>Challenges:</span>
-                {stage.challenges}
               </p>
             </div>
           ))}

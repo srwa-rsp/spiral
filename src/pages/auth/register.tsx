@@ -37,7 +37,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-start gap-40 px-6 ">
-      <div className="p-10 border-2 border-gray-200 rounded-lg">
+      <div className="p-10 border-2 border-gray-200 rounded-lg z-10">
         <Formik
           enableReinitialize
           initialValues={initialValues}

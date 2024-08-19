@@ -13,7 +13,7 @@ import {
 import { useSession, signOut} from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from '@/assets/images/enso-spiral.png'
+import logo from '@/assets/images/enso-login.png'
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -26,7 +26,7 @@ export default function App() {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-white">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className={`${router.pathname === '/auth/login' || router.pathname === '/auth/register'? 'bg-transparent': 'bg-white'}`}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -34,7 +34,7 @@ export default function App() {
         />
         <NavbarBrand>
           <Image width={30} height={30} src={logo} alt={"logo"} />
-          <Link color="foreground" href="/" className="text-[1.6rem] font-bold">
+          <Link color="foreground" href="/" className="text-[1.6rem] font-bold ml-1">
             Spiral
           </Link>
         </NavbarBrand>
