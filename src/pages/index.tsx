@@ -1,27 +1,18 @@
 "use-client";
-import { useGetStages } from "@/utils/services";
+import { useGetStages } from "@/utils/services.ts";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { colors } from "@/utils/consts";
-import Link from "next/link";
+import { colors } from "@/utils/consts.ts";
 import Image from "next/image";
 import { Spinner } from "@nextui-org/react";
 import circle from '@/assets/images/Circle.svg'
 import spiral from '@/assets/images/Spiral.svg'
 import { toast } from "react-toastify";
-import { StageData } from "@/types/interfaces/StagesInterface";
+import { StageData } from "@/types/interfaces/StagesInterface.ts";
 
 const index = () => {
-  const { data: session, status } = useSession();
   const [stages, setStages] = useState<StageData[]>([]);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/auth/login");
-    }
-  }, [router, status]);
 
   useEffect(() => {
     const getStages = async () => {
@@ -41,7 +32,7 @@ const index = () => {
       </div>
     );;
   }
-  if (status === "authenticated") {
+
     return (
       <>
         <section
@@ -134,9 +125,6 @@ const index = () => {
         </section>
       </>
     );
-  } else {
-    return <div>Redirecting...</div>;
   }
-};
-
+index.auth = true;
 export default index;
