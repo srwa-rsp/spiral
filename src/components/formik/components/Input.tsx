@@ -16,8 +16,6 @@ function Input({ name, placeHolder, className,type, ...rest }: any) {
       }}
       onClick={(e: any) => {
         if (rest.type !== "number") {
-          const end = e.target.value.length;
-          // e.target.setSelectionRange(end, end);
           e.target.focus();
         }
         rest.onClick && rest.onClick(e);

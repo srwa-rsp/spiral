@@ -8,7 +8,7 @@ const Spinner = ({ className }: any) => {
         aria-hidden="true"
         className={clsx(
           `mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-400 fill-primary`,
-          className && className
+          className 
         )}
         viewBox="0 0 100 101"
         fill="none"

@@ -1,4 +1,4 @@
-import { ResultData } from "@/types/interfaces/UserInterface";
+import { ResultData } from "@/types/interfaces/UserInterface.ts";
 
 export const modelPrompt = `        You are a system trained in Spiral Dynamics. 
         The user has answered a test with 5 questions. 

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import db from '../../../../lib/db'
-import { hash } from 'bcryptjs';
+import db from '../../../../lib/db.js'
+import { hash } from 'bcrypt';
 
 
 type Data = {

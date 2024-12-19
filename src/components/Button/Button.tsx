@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-
 import clsx from "clsx";
-import { useRouter } from "next/router";
-import Spinner from "../spinner/Spinner";
+import { useRouter } from "next/router.js";
+import Spinner from "@/components/Spinner/Spinner.tsx";
 
 const classes: any = {
   base: "focus:outline-none transition ease-in-out duration-300 py-2 px-1 text-[1rem] font-bold flex justify-center items-center relative  cursor-pointer",

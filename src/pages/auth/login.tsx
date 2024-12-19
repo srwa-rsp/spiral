@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Formik } from "formik";
-import FormikController from "@/components/formik/FormikController";
-import Button from "@/components/Button/Button";
+import FormikController from "@/components/formik/FormikController.tsx";
+import Button from "@/components/Button/Button.tsx";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import { UserLogin } from "@/types/interfaces/UserInterface";
+import { UserLogin } from "@/types/interfaces/UserInterface.ts";
 
-const initialValues:UserLogin = {
+const initialValues: UserLogin = {
   email: "",
   password: "",
 };
@@ -28,10 +28,9 @@ const Login = () => {
         redirect: false,
         email,
         password,
-        callbackUrl: "/",
       });
       router.push("/");
-    } catch (err:any) {
+    } catch (err: any) {
       toast.error(err);
     }
   };
@@ -44,40 +43,35 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {(props: any) => {
-            const { setFieldValue, setValue, resetForm, values } = props;
-            return (
-              <Form autoComplete="off">
-                <FormikController
-                  control={`input`}
-                  name={"email"}
-                  label={"email"}
-                  type="email"
-                />
-                <FormikController
-                  control={`input`}
-                  name={"password"}
-                  label={"password"}
-                  type="password"
-                />
-                <Button
-                  type="submit"
-                  color="primary"
-                  className={"w-full rounded-lg  mt-32 "}
-                >
-                  Login
-                </Button>
-                <Button
-                  type="button"
-                  color="secondary"
-                  className={"w-full rounded-lg  mt-2 "}
-                  onClick={() => router.push("/auth/register")}
-                >
-                  Register
-                </Button>
-              </Form>
-            );
-          }}
+          <Form autoComplete="off">
+            <FormikController
+              control={`input`}
+              name={"email"}
+              label={"email"}
+              type="email"
+            />
+            <FormikController
+              control={`input`}
+              name={"password"}
+              label={"password"}
+              type="password"
+            />
+            <Button
+              type="submit"
+              color="primary"
+              className={"w-full rounded-lg  mt-32 "}
+            >
+              Login
+            </Button>
+            <Button
+              type="button"
+              color="secondary"
+              className={"w-full rounded-lg  mt-2 "}
+              onClick={() => router.push("/auth/register")}
+            >
+              Register
+            </Button>
+          </Form>
         </Formik>
       </div>
     </div>
