@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { ErrorMessage } from "formik";
 import React from "react";
 import { setLocale } from "yup";
-import Input from "./components/Input";
-import Select from "./components/Select";
+import Input from "./components/Input.tsx";
+import Select from "./components/Select.tsx";
 
 setLocale({
   mixed: {

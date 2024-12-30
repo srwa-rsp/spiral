@@ -1,4 +1,5 @@
-import axiosInstance from "./axiosConfig";
+import { UserRegister } from "@/types/interfaces/UserInterface.ts";
+import axiosInstance from "./axiosConfig.ts";
  
 export const useGetStages = async() => {
     try {
@@ -34,7 +35,7 @@ export const useGetResult= async() => {
     }
 }
 
-export const useRegisterUser = async(params) => {
+export const useRegisterUser = async(params: UserRegister) => {
     try {
         const response = await axiosInstance.post("/auth/register",params);
         return response.data;

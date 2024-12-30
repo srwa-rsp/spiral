@@ -1,10 +1,10 @@
-import db from "../../../../lib/db";
+import db from "../../../../lib/db.js";
 import OpenAI from "openai";
 import {
   modelPrompt,
   responseStructure,
   referenceColors,
-} from "../../../utils/consts";
+} from "../../../utils/consts.ts";
 import { getToken } from "next-auth/jwt";
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -25,7 +25,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
       try {
         for (const answerSet of answers) {
           await db("user-responses").insert({
-            user_id: 1,
+            user_id: token.id,
             question: answerSet.question,
             answers: JSON.stringify(answerSet.answers),
           });
@@ -48,8 +48,8 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
             },
           ],
         });
-        let openAIResponseText = responseText.choices[0].message.content;
-        openAIResponseText = openAIResponseText.replace(/```json|```/g, "");
+        let openAIResponseText:string | null = responseText.choices[0].message.content;
+        openAIResponseText = openAIResponseText?.replace(/```json|```/g, "") ?? "";
         const openAIResponse = JSON.parse(openAIResponseText);
 
         await db("user_result").insert({

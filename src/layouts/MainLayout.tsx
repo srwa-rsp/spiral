@@ -1,5 +1,5 @@
 
-import  Header  from "@/components/Header/Header";
+import  Header  from "@/components/Header/Header.tsx";
 import { ReactNode } from "react";
 interface Props {
   children?: ReactNode;

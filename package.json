@@ -18,10 +18,9 @@
   "dependencies": {
     "@nextui-org/navbar": "^2.0.36",
     "@nextui-org/react": "^2.4.6",
-    "@testing-library/react-hooks": "^8.0.1",
     "axios": "^1.7.3",
     "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "formik": "^2.4.6",

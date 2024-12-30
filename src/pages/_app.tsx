@@ -1,6 +1,6 @@
-import { AuthLayout } from "@/layouts/AuthLayout";
-import { MainLayout } from "@/layouts/MainLayout";
-import {NextUIProvider} from '@nextui-org/react'
+import { AuthLayout } from "@/layouts/AuthLayout.tsx";
+import { MainLayout } from "@/layouts/MainLayout.tsx";
+import { NextUIProvider } from "@nextui-org/react";
 import "@/styles/globals.css";
 import type { NextComponentType } from "next";
 import { AppContext, AppInitialProps, AppLayoutProps } from "next/app";
@@ -8,10 +8,10 @@ import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from "next-auth/react";
+import AuthCheck from "@/utils/authCheck.tsx";
 
-const UnProtectedRoutes: string[] = [`/auth/login`, "/auth/register"];
-const PublicRoutes: string[] = ["/home"];
+const AuthRoutes: string[] = [`/auth/login`, "/auth/register"];
 const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   Component,
   pageProps: { session, ...pageProps },
@@ -32,25 +32,27 @@ const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
     function (page: ReactNode) {
       return (
         <SessionProvider session={session}>
-        <NextUIProvider>
-        <>
-          {UnProtectedRoutes.includes(router.pathname) ? (
-            <AuthLayout>{page}</AuthLayout>
-          ) : PublicRoutes.includes(router.pathname) ? (
-            <MainLayout>{page}</MainLayout>
-          ) : (
-            <MainLayout>{page}</MainLayout>
-          )}
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            closeOnClick
-            theme="light"
-            hideProgressBar={false}
-            bodyClassName="font-[yekanbakh] text-[1rem]"
-          />
-        </>
-        </NextUIProvider>
+          <NextUIProvider>
+            <>
+              {AuthRoutes.includes(router.pathname) ? (
+                <AuthLayout>{page}</AuthLayout>
+              ) : Component.auth ? (
+                <AuthCheck>
+                  <MainLayout>{page}</MainLayout>
+                </AuthCheck>
+              ) : (
+                <MainLayout>{page}</MainLayout>
+              )}
+              <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                closeOnClick
+                theme="light"
+                hideProgressBar={false}
+                bodyClassName="font-[nunito] text-[1rem]"
+              />
+            </>
+          </NextUIProvider>
         </SessionProvider>
       );
     };

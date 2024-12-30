@@ -62,7 +62,7 @@ export default function App() {
         )}
         {status === "authenticated" && (
           <NavbarItem>
-            <span className="mx-2 capitalize">{session?.user?.name || null}</span>
+            <span className="mx-2 capitalize">{`Hi ${session?.user?.name || null}!`}</span>
             <Button color="primary" variant="flat" onClick={() => signOut({ callbackUrl: 'http://localhost:3000/auth/login' })}>
               LogOut
             </Button>
