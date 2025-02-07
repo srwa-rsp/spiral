@@ -1,4 +1,4 @@
-import db from "../../../../lib/db";
+import db from "../../../../lib/db.js";
 import { getToken } from "next-auth/jwt";
 import type { NextApiRequest, NextApiResponse } from 'next'
 

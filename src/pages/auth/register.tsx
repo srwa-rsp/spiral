@@ -1,12 +1,12 @@
 import React from "react";
 import { Form, Formik } from "formik";
-import FormikController from "@/components/formik/FormikController.tsx";
-import Button from "@/components/Button/Button.tsx";
+import FormikController from "@/components/formik/FormikController";
+import Button from "@/components/Button/Button";
 import * as Yup from "yup";
-import { useRegisterUser } from "@/utils/services.ts";
+import { useRegisterUser } from "@/utils/services";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { UserRegister } from "@/types/interfaces/UserInterface.ts";
+import { UserRegister } from "@/types/interfaces/UserInterface";
 
 const initialValues: UserRegister = {
   name: "",

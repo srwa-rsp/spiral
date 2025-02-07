@@ -1,5 +1,5 @@
-import { AuthLayout } from "@/layouts/AuthLayout.tsx";
-import { MainLayout } from "@/layouts/MainLayout.tsx";
+import { AuthLayout } from "@/layouts/AuthLayout";
+import { MainLayout } from "@/layouts/MainLayout";
 import { NextUIProvider } from "@nextui-org/react";
 import "@/styles/globals.css";
 import type { NextComponentType } from "next";
@@ -9,7 +9,7 @@ import React, { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { SessionProvider } from "next-auth/react";
-import AuthCheck from "@/utils/authCheck.tsx";
+import AuthCheck from "@/utils/authCheck";
 
 const AuthRoutes: string[] = [`/auth/login`, "/auth/register"];
 const App: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({

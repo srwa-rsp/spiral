@@ -1,4 +1,4 @@
-import Header from "@/components/Header/Header.tsx";
+import Header from "@/components/Header/Header";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";

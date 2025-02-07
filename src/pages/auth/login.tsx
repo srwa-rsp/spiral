@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Formik } from "formik";
-import FormikController from "@/components/formik/FormikController.tsx";
-import Button from "@/components/Button/Button.tsx";
+import FormikController from "@/components/formik/FormikController";
+import Button from "@/components/Button/Button";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import { UserLogin } from "@/types/interfaces/UserInterface.ts";
+import { UserLogin } from "@/types/interfaces/UserInterface";
 
 const initialValues: UserLogin = {
   email: "",

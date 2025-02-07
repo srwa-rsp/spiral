@@ -42,7 +42,6 @@ export const referenceColors = [
     color: "amber",
   },
   {
-    id: 5,
     name: "Achiever",
     color: "orange",
   },

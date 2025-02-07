@@ -38,7 +38,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
               role: "system",
               content: `${modelPrompt} The JSON response should be structured as follows: ${responseStructure}.Here is a reference object for the stage and color names:${JSON.stringify(
                 referenceColors
-              )}.Always use the color names for result stage percentages`,
+              )}.Always use the color names specified in the reference object for result stage percentages`,
             },
             {
               role: "user",
@@ -72,7 +72,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
       res.status(401).json({ message: "Unauthorized access - please log in." });
     }
   } else {
-    res.setHeader("Allow", ["POST"]);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

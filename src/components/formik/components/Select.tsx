@@ -18,7 +18,7 @@ function Select(props: any) {
       }}
       {...rest}
       className={clsx(
-        'text-black w-full h-[5rem] rounded-2xl border border-1  p-6',
+        'text-black w-full h-[5rem] rounded-2xl border-1  p-6',
         className ? className : '',
         (touched && error) ? 'border-red-middle focus:border-red-middle' : 'border-gray-500'
       )}>

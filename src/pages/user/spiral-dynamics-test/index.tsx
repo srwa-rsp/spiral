@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Question from "@/components/Question/Question.tsx";
+import Question from "@/components/Question/Question";
 import { Button } from "@nextui-org/react";
-import { useGetQuestions, usePostUserResults } from "@/utils/services.ts";
+import { useGetQuestions, usePostUserResults } from "@/utils/services";
 import { Progress } from "@nextui-org/progress";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -9,8 +9,8 @@ import {
   QuestionData,
   FinalAnswers,
   Answer,
-} from "@/types/interfaces/QuestionsInterface.ts";
-import Spinner from "@/components/Spinner/Spinner.tsx";
+} from "@/types/interfaces/QuestionsInterface";
+import Spinner from "@/components/Spinner/Spinner";
 
 const index = () => {
   const [questions, setQuestions] = useState([]);

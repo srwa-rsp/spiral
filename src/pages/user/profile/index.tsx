@@ -1,17 +1,15 @@
-import { useGetResult } from "@/utils/services.ts";
+import { useGetResult } from "@/utils/services";
 import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
-import { colors } from "@/utils/consts.ts";
-import { ChartData } from "@/types/interfaces/StagesInterface.ts";
-import { ResultData } from "@/types/interfaces/UserInterface.ts";
-import Spinner from "@/components/Spinner/Spinner.tsx";
-import { useSession } from "next-auth/react";
+import { colors } from "@/utils/consts";
+import { ChartData } from "@/types/interfaces/StagesInterface";
+import { ResultData } from "@/types/interfaces/UserInterface";
+import Spinner from "@/components/Spinner/Spinner";
 import { toast } from "react-toastify";
 
 const index = () => {
   const [result, setResult] = useState<ResultData | null>(null);
   const [chartData, setChartData] = useState<ChartData[]>([]);
-  const { status } = useSession();
 
   useEffect(() => {
     const getResult = async () => {
@@ -60,79 +58,70 @@ const index = () => {
       </div>
     );
   }
-  if (status === "authenticated") {
-    return (
-      <div className="flex flex-col gap-6 px-6 py-12 md:px-16 ">
-        <div className="flex flex-col md:flex-row justify-between items-center p-20">
-          <div className=" max-w-[35rem] ">
-            <h2 className="font-bold text-[2.5rem]">Your Profile</h2>
-            {result ? (
-              <p className="">{result?.feedback}</p>
-            ) : (
-              "You haven't taken a test yet!"
-            )}
-          </div>
-          {result && (
-            <div className=" flex flex-col gap-2 items-center justify-center ">
-              <PieChart width={300} height={200}>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={colors[entry.name]} />
-                  ))}
-                </Pie>
-              </PieChart>
-              <p className="text-[0.8rem]">
-                Distribution Across Spiral Dynamics Stages{" "}
-              </p>
-            </div>
+
+  return (
+    <div className="flex flex-col gap-6 px-6 py-12 md:px-16 ">
+      <div className="flex flex-col md:flex-row justify-between items-center p-20">
+        <div className=" max-w-[35rem] ">
+          <h2 className="font-bold text-[2.5rem]">Your Profile</h2>
+          {result ? (
+            <p className="">{result?.feedback}</p>
+          ) : (
+            "You haven't taken a test yet!"
           )}
         </div>
-        <div className="flex flex-col gap-6 md:flex-row">
-          <div className="px-6 border-b-2 border-gray-200 md:border-b-0 md:border-r-2">
-            <h4 className="text-[1.5rem] h-20">
-              Growth into other Spiral Dynamics stages
-            </h4>
-            {result
-              ? result?.roadmap_vertical?.map((item: string, index: number) => (
-                  <p
-                    key={index}
-                    className="p-2 border-1 mb-2 rounded shadow-md"
-                  >
-                    {item}
-                  </p>
-                ))
-              : "No Result to Display"}
+        {result && (
+          <div className=" flex flex-col gap-2 items-center justify-center ">
+            <PieChart width={300} height={200}>
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={colors[entry.name]} />
+                ))}
+              </Pie>
+            </PieChart>
+            <p className="text-[0.8rem]">
+              Distribution Across Spiral Dynamics Stages{" "}
+            </p>
           </div>
-          <div>
-            <h4 className="text-[1.5rem] h-20">
-              Enhancing skills within your current stages
-            </h4>
-            {result
-              ? result?.roadmap_horizontal?.map(
-                  (item: string, index: number) => (
-                    <p
-                      key={index}
-                      className="p-2 border-1 mb-2 rounded shadow-md"
-                    >
-                      {item}
-                    </p>
-                  )
-                )
-              : "No Result to display"}
-          </div>
+        )}
+      </div>
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="px-6 border-b-2 border-gray-200 md:border-b-0 md:border-r-2">
+          <h4 className="text-[1.5rem] h-20">
+            Growth into other Spiral Dynamics stages
+          </h4>
+          {result
+            ? result?.roadmap_vertical?.map((item: string, index: number) => (
+                <p key={index} className="p-2 border-1 mb-2 rounded shadow-md">
+                  {item}
+                </p>
+              ))
+            : "No Result to Display"}
+        </div>
+        <div>
+          <h4 className="text-[1.5rem] h-20">
+            Enhancing skills within your current stages
+          </h4>
+          {result
+            ? result?.roadmap_horizontal?.map((item: string, index: number) => (
+                <p key={index} className="p-2 border-1 mb-2 rounded shadow-md">
+                  {item}
+                </p>
+              ))
+            : "No Result to display"}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 index.auth = true;
 export default index;

@@ -22,7 +22,7 @@ export default function App() {
 
   const menuItems = [
     { title: "Profile", link: "/user/profile" },
-    { title: "Take the Test", link: "/spiral-dynamics-test" },
+    { title: "Take the Test", link: "/user/spiral-dynamics-test" },
   ];
 
   return (
@@ -42,7 +42,7 @@ export default function App() {
       {status === "authenticated" && (
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem className={`border-r-2 pr-4`} >
-            <Link color="foreground" href="/spiral-dynamics-test" className={`${router.pathname ==="/spiral-dynamics-test" ? 'font-semibold border-b-2': '' } p-1`}>
+            <Link color="foreground" href="/user/spiral-dynamics-test" className={`${router.pathname ==="/user/spiral-dynamics-test" ? 'font-semibold border-b-2': '' } p-1`}>
               Take the Test
             </Link>
           </NavbarItem>

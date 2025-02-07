@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { QuestionProps } from "@/types/interfaces/QuestionsInterface.tsx"; 
-import Button from "@/components/Button/Button.tsx";
+import { QuestionProps } from "@/types/interfaces/QuestionsInterface"; 
+import Button from "@/components/Button/Button";
 
 const Question: React.FC<QuestionProps>  = ({ question, options, onSelectionChange }) => {
     

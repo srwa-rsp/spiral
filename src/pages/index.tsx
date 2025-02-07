@@ -1,15 +1,13 @@
 "use-client";
-import { useGetStages } from "@/utils/services.ts";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useGetStages } from "@/utils/services";
 import React, { useEffect, useState } from "react";
-import { colors } from "@/utils/consts.ts";
+import { colors } from "@/utils/consts";
 import Image from "next/image";
 import { Spinner } from "@nextui-org/react";
 import circle from '@/assets/images/Circle.svg'
 import spiral from '@/assets/images/Spiral.svg'
 import { toast } from "react-toastify";
-import { StageData } from "@/types/interfaces/StagesInterface.ts";
+import { StageData } from "@/types/interfaces/StagesInterface";
 
 const index = () => {
   const [stages, setStages] = useState<StageData[]>([]);
